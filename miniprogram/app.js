@@ -15,6 +15,23 @@ App({
       })
     }
 
-    this.globalData = {}
-  }
+    this.globalData = {
+      userInfo: {},
+      openId: ''
+    }
+    this.getOpenId()
+  },
+  getOpenId: function () {
+    // 调用云函数
+    wx.cloud.callFunction({
+      name: 'login',
+      data: {},
+      success: res => {
+        this.globalData.openId = res.result.openid
+      },
+      fail: err => {
+        console.error('[云函数] [login] 调用失败', err)
+      }
+    })
+  },
 })

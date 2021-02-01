@@ -1,3 +1,9 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "mp-tabbar": "weui-miniprogram/tabbar/tabbar",
+    "activity": "/components/activity/activity",
+    "score": "/components/score/score",
+    "home": "/components/home/home",
+    "login": "/components/login/login"
+  }
 }
