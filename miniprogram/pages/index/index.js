@@ -3,6 +3,7 @@ const app = getApp()
 
 Page({
   data: {
+    userInfo: {},
     logged: 0,
     tabIndex: 2,
     list: [{
@@ -23,33 +24,46 @@ Page({
   },
 
   onLoad: function () {
-    // 获取用户信息
-    wx.getSetting({
+    this.init()
+  },
+
+  init: function () {
+    // 调用云函数
+    wx.cloud.callFunction({
+      name: 'login',
+      data: {},
       success: res => {
-        if (res.authSetting['scope.userInfo']) {
-          // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
-          wx.getUserInfo({
-            success: res => {
-              app.globalData.userInfo = res.userInfo
-              this.setData({
-                userInfo: res.userInfo,
-                logged: 1,
-              })
-            }
-          })
-        } else {
-          this.setData({
-            logged: -1
-          })
-        }
+        app.globalData.openId = res.result.openid
+        this.getUserInfoFromDataBase(app.globalData.openId)
+      },
+      fail: err => {
+        console.error('[云函数] [login] 调用失败', err)
       }
     })
-    console.log(app.globalData)
   },
 
-  onLoginSuccess: function (e) {
-    this.setData({logged: 1})
+  getUserInfoFromDataBase: function (openId) {
+    const that = this;
+    const db = wx.cloud.database()
+    db.collection('user').where({
+      _openid: openId,
+    }).get({
+      success: function(res) {
+        // res.data 是包含以上定义的两条记录的数组
+        if (res.data.length > 0) {
+          app.globalData.userInfo = res.data[0]
+          that.setData({logged: 1, userInfo: app.globalData.userInfo})
+        } else {
+          that.setData({logged: -1})
+        }
+      },
+      fail: err => {
+        that.setData({logged: -1})
+      }
+    })
   },
 
-  
+  onLoginSuccess: function() {
+    this.setData({logged: 1, userInfo: app.globalData.userInfo})
+  }
 })
