@@ -4,6 +4,7 @@
     "activity": "/components/activity/activity",
     "score": "/components/score/score",
     "home": "/components/home/home",
-    "login": "/components/login/login"
+    "login": "/components/login/login",
+    "error": "/components/error/error"
   }
 }

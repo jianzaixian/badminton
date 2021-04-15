@@ -2,11 +2,11 @@
 <view class="container">
 
   <!-- 用户 openid -->
-  <view wx:if="{{logged == -1}}"><login bind:loginSuccess="onLoginSuccess" /></view>
+  <view wx:if="{{logged == -1}}"><login bind:loginSuccess="onLoginSuccess"/></view>
   <view wx:if="{{logged == 1}}">
       <view wx:if="{{tabIndex == 0}}"><activity /></view>
       <view wx:if="{{tabIndex == 1}}"><score/></view>
-      <view wx:if="{{tabIndex == 2}}"><home/></view>
+      <view wx:if="{{tabIndex == 2}}"><home userInfo="{{userInfo}}"/></view>
       <mp-tabbar current="2" style="position:fixed;bottom:0;width:100%;left:0;right:0;" list="{{list}}" bindchange="tabChange"></mp-tabbar>
   </view>
 </view>

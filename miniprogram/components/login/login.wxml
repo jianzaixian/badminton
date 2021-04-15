@@ -1,8 +1,8 @@
-<!--components/login/login.wxml-->
+<!--components/login.wxml-->
 <button 
-      open-type="getUserInfo" 
+      open-type="getUserProfile" 
       type="primary"
-      bindgetuserinfo="onGetUserInfo"
+      bindtap="getUserProfile"
       size="default"
       class="loginButton"
-    >点击使用微信登陆</button>
+    >微信登陆</button>

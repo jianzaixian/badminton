@@ -1,2 +1,8 @@
 <!--components/home/home.wxml-->
-<text>个人中心</text>
+<view>
+  <view>个人中心</view>
+  <view>微信昵称: {{userInfo.nickName}}</view>
+  <view>性别: {{userInfo.gender}}</view>
+  <view>国家: {{userInfo.country}}</view>
+  <image src="{{userInfo.avatarUrl}}"></image>
+</view>

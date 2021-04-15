@@ -1,4 +1,5 @@
-// components/login/login.js
+// components/login.js
+const app = getApp()
 Component({
   /**
    * Component properties
@@ -18,16 +19,24 @@ Component({
    * Component methods
    */
   methods: {
-    onGetUserInfo: function (e) {
-      if (e.detail.userInfo) {
-        this.register(
-          e.detail.userInfo
-        )
-        this.triggerEvent('loginSuccess')
-      }
+    getUserProfile: function () {
+      console.log('profile')
+      const that = this;
+      wx.getUserProfile({
+        desc: '用于完善会员资料', 
+        success: (res) => {
+          app.globalData.userInfo = res.userInfo
+          that.register(app.globalData.userInfo)
+          console.log(res)
+        },
+        fail: err => {
+          console.log('fail')
+        }
+      })
     },
+  
     register: function (userInfo) {
-      console.log('register')
+      const that = this;
       const db = wx.cloud.database()
       db.collection('user').add({
         data: {
@@ -38,17 +47,17 @@ Component({
         success: res => {
           console.log('register success')
           app.globalData.userInfo = userInfo
+          console.log(userInfo)
           wx.showToast({
             title: '登陆成功',
           })
-          console.log('[数据库] [新增记录] 成功，记录 _id: ', res._id)
+          that.triggerEvent('loginSuccess')
         },
         fail: err => {
           wx.showToast({
             icon: 'none',
             title: '登陆失败'
           })
-          console.error('[数据库] [新增记录] 失败：', err)
         }
       })
     },

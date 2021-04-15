@@ -1,4 +1,4 @@
-/* components/login.wxss */
+/* components/login/login.wxss */
 .loginButton {
   position: absolute;
   top: 50%;
