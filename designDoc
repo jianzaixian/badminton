@@ -1,0 +1,8 @@
+The feature that we must support in the first version (MVP)
+1. Organizers can create activity
+2. Users can join activity
+3. Users can quit the activity before a specific time( set by the organizer, usually one day before the activity)
+4. Users can mark himself as paid(need to choose by cash or by paypay)
+5. Organizers can easily know who hasn't paid
+6. When the joiners reached the capacity of the activity, the following joiners will become candidate, they need to wait the queue.
+7. Waiters can be notified when he/she become formal joiners(in the case enough joiners quit the activity)
