@@ -7,13 +7,19 @@ Page({
     logged: 0,
     tabIndex: 2,
     list: [{
-        "text": "活动"
+        "text": "活动",
+        "iconPath": "/images/badminton.svg",
+        "selectedIconPath": "/images/badmintonGreen.svg"
       },
       {
-        "text": "积分"
+        "text": "积分",
+        "iconPath": "/images/score.svg",
+        "selectedIconPath": "/images/scoreGreen.svg"
       },
       {
-        "text": "我"
+        "text": "我",
+        "iconPath": "/images/homepage.svg",
+        "selectedIconPath": "/images/homepageGreen.svg"
       }
     ]
   },
